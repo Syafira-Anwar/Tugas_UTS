@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi Pengiriman - Tracking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+    <div class="max-w-4xl mx-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Informasi Pengiriman</h1>
+            <a href="dashboard.html" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm">&larr; Dashboard</a>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <h2 class="text-lg font-semibold text-gray-700 mb-2">Lacak Paket</h2>
+            <form onsubmit="lacakPengiriman(event)" class="flex gap-3">
+                <input type="text" id="input-do" required placeholder="Masukkan No DO (Contoh: DO-2026-001)" class="flex-1 border rounded px-4 py-2 text-sm uppercase font-mono outline-none">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm">Cari</button>
+            </form>
+        </div>
+
+        <div id="hasil-tracking" class="hidden bg-white rounded-lg shadow-md p-6 space-y-6">
+            <div class="flex justify-between items-center border-b pb-4">
+                <div>
+                    <div class="text-xs text-gray-400">Nomor DO</div>
+                    <div id="res-do" class="text-lg font-bold font-mono"></div>
+                </div>
+                <span id="res-status" class="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800"></span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div>
+                    <span class="text-gray-500 block">Nama Pemesan:</span>
+                    <strong id="res-nama" class="text-gray-800"></strong>
+                </div>
+                <div>
+                    <span class="text-gray-500 block">Total Pembayaran:</span>
+                    <strong id="res-total" class="text-blue-600"></strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const databaseDO = {
+            "DO-2026-001": { namaPemesan: "Syafira Anwar", status: "Dalam Pengiriman", total: 245000 }
+        };
+
+        function lacakPengiriman(e) {
+            e.preventDefault();
+            const key = document.getElementById('input-do').value.trim().toUpperCase();
+            const data = databaseDO[key];
+            const hasil = document.getElementById('hasil-tracking');
+            
+            if (data) {
+                hasil.classList.remove('hidden');
+                document.getElementById('res-do').innerText = key;
+                document.getElementById('res-status').innerText = data.status;
+                document.getElementById('res-nama').innerText = data.namaPemesan;
+                document.getElementById('res-total').innerText = 'Rp ' + new Intl.NumberFormat('id-ID').format(data.total);
+            } else {
+                hasil.classList.add('hidden');
+                alert("Nomor DO tidak ditemukan! Coba: DO-2026-001");
+            }
+        }
+    </script>
+</body>
+</html>
