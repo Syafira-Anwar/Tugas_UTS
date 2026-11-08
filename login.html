@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login</title>
+<style>
+  :root {
+    --bg: #eef2f7;
+    --card: #ffffff;
+    --text: #1c2733;
+    --muted: #5d6b7a;
+    --line: #cfd8e3;
+    --primary: #1f5fbf;
+    --primary-dark: #174b98;
+    --danger: #c0392b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12181f;
+      --card: #1c242d;
+      --text: #e8eef5;
+      --muted: #9aa8b7;
+      --line: #35424f;
+      --primary: #5b9bf0;
+      --primary-dark: #7db0f5;
+      --danger: #ff7a6b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  }
+  .card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 32px 28px;
+  }
+  h1 { margin: 0 0 4px; font-size: 1.6rem; }
+  .sub { margin: 0 0 24px; color: var(--muted); font-size: .95rem; }
+  label { display: block; margin-bottom: 6px; font-size: .9rem; font-weight: 600; }
+  input {
+    width: 100%;
+    padding: 11px 12px;
+    margin-bottom: 16px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text);
+    font-size: 1rem;
+  }
+  input:focus, button:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+  }
+  .btn {
+    width: 100%;
+    padding: 12px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn:hover { background: var(--primary-dark); }
+  .links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+  .link {
+    background: none;
+    border: 0;
+    padding: 4px 0;
+    color: var(--primary);
+    font-size: .9rem;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  /* Modal */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0,0,0,.55);
+  }
+  .overlay.show { display: flex; }
+  .modal {
+    width: 100%;
+    max-width: 380px;
+    background: var(--card);
+    border-radius: 10px;
+    padding: 26px 24px;
+    border: 1px solid var(--line);
+    animation: pop .18s ease-out;
+  }
+  @keyframes pop { from { transform: scale(.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .modal { animation: none; } }
+  .modal h2 { margin: 0 0 8px; font-size: 1.25rem; }
+  .modal p { margin: 0 0 18px; color: var(--muted); font-size: .95rem; }
+  .modal.error h2 { color: var(--danger); }
+  .modal .row { display: flex; gap: 10px; }
+  .btn-ghost {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text);
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .modal .row .btn { flex: 1; width: auto; }
+  .success { color: var(--primary); font-size: .9rem; margin: -8px 0 14px; display: none; }
+</style>
+</head>
+<body>
+
+<main class="card">
+  <h1>Login</h1>
+  <p class="sub">Masuk dengan email dan password Anda.</p>
+
+  <form id="loginForm" novalidate>
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="nama@email.com" autocomplete="email" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Masukkan password" autocomplete="current-password" required>
+
+    <button type="submit" class="btn">Login</button>
+  </form>
+
+  <div class="links">
+    <button type="button" class="link" data-open="modalLupa">Lupa Password</button>
+    <button type="button" class="link" data-open="modalDaftar">Daftar</button>
+  </div>
+</main>
+
+<!-- Modal: login salah -->
+<div class="overlay" id="modalError" role="dialog" aria-modal="true" aria-labelledby="errTitle">
+  <div class="modal error">
+    <h2 id="errTitle">Login gagal</h2>
+    <p>email/password yang anda masukkan salah</p>
+    <button type="button" class="btn" data-close="modalError">Coba lagi</button>
+  </div>
+</div>
+
+<!-- Modal: lupa password -->
+<div class="overlay" id="modalLupa" role="dialog" aria-modal="true" aria-labelledby="lupaTitle">
+  <div class="modal">
+    <h2 id="lupaTitle">Lupa Password</h2>
+    <p>Masukkan email yang terdaftar. Kami akan mengirim tautan untuk mengatur ulang password.</p>
+    <label for="lupaEmail">Email</label>
+    <input type="email" id="lupaEmail" placeholder="nama@email.com">
+    <div class="success" id="lupaOk">Tautan reset password telah dikirim.</div>
+    <div class="row">
+      <button type="button" class="btn-ghost" data-close="modalLupa">Batal</button>
+      <button type="button" class="btn" id="kirimReset">Kirim</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: daftar -->
+<div class="overlay" id="modalDaftar" role="dialog" aria-modal="true" aria-labelledby="daftarTitle">
+  <div class="modal">
+    <h2 id="daftarTitle">Daftar</h2>
+    <p>Buat akun baru untuk mulai menggunakan layanan.</p>
+    <label for="daftarNama">Nama lengkap</label>
+    <input type="text" id="daftarNama" placeholder="Nama lengkap">
+    <label for="daftarEmail">Email</label>
+    <input type="email" id="daftarEmail" placeholder="nama@email.com">
+    <label for="daftarPass">Password</label>
+    <input type="password" id="daftarPass" placeholder="Buat password">
+    <div class="success" id="daftarOk">Akun berhasil dibuat. Silakan login.</div>
+    <div class="row">
+      <button type="button" class="btn-ghost" data-close="modalDaftar">Batal</button>
+      <button type="button" class="btn" id="kirimDaftar">Daftar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Akun contoh (simulasi, tanpa server)
+  const akun = [
+    { email: "admin@email.com", password: "admin123" }
+  ];
+
+  const $ = (id) => document.getElementById(id);
+  const open = (id) => $(id).classList.add("show");
+  const close = (id) => $(id).classList.remove("show");
+
+  document.querySelectorAll("[data-open]").forEach(b =>
+    b.addEventListener("click", () => open(b.dataset.open)));
+  document.querySelectorAll("[data-close]").forEach(b =>
+    b.addEventListener("click", () => close(b.dataset.close)));
+  document.querySelectorAll(".overlay").forEach(o =>
+    o.addEventListener("click", e => { if (e.target === o) o.classList.remove("show"); }));
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") document.querySelectorAll(".overlay.show").forEach(o => o.classList.remove("show"));
+  });
+
+  // Login
+  $("loginForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = $("email").value.trim();
+    const password = $("password").value;
+    const cocok = akun.some(a => a.email === email && a.password === password);
+    if (cocok) {
+      window.location.href = "dashboard.html";
+    } else {
+      open("modalError");
+    }
+  });
+
+  // Lupa password
+  $("kirimReset").addEventListener("click", () => {
+    if ($("lupaEmail").value.trim()) $("lupaOk").style.display = "block";
+  });
+
+  // Daftar
+  $("kirimDaftar").addEventListener("click", () => {
+    const email = $("daftarEmail").value.trim();
+    const pass = $("daftarPass").value;
+    if ($("daftarNama").value.trim() && email && pass) {
+      akun.push({ email, password: pass });
+      $("daftarOk").style.display = "block";
+    }
+  });
+</script>
+</body>
+</html>
