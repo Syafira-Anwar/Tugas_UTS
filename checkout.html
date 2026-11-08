@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Pemesanan - Checkout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Halaman Pemesanan (Checkout)</h1>
+            <a href="dashboard.html" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm">&larr; Dashboard</a>
+        </div>
+
+        <form onsubmit="prosesCheckout(event)">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">1. Informasi Pemesan</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                                <input type="text" required placeholder="Budi Santoso" class="w-full border rounded px-3 py-2 text-sm outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" required placeholder="budi@example.com" class="w-full border rounded px-3 py-2 text-sm outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon</label>
+                                <input type="tel" required placeholder="08123456789" class="w-full border rounded px-3 py-2 text-sm outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Kota</label>
+                                <input type="text" required placeholder="Bekasi" class="w-full border rounded px-3 py-2 text-sm outline-none">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Alamat Pengiriman</label>
+                                <textarea rows="2" required placeholder="Jl. Raya..." class="w-full border rounded px-3 py-2 text-sm outline-none"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">2. Informasi Pembayaran & Pengiriman</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Metode Pembayaran</label>
+                                <select required class="w-full border rounded px-3 py-2 text-sm outline-none">
+                                    <option value="">-- Pilih --</option>
+                                    <option value="BCA">Transfer Bank (BCA)</option>
+                                    <option value="E-Wallet">E-Wallet</option>
+                                    <option value="COD">COD</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Jasa Pengiriman</label>
+                                <select required class="w-full border rounded px-3 py-2 text-sm outline-none">
+                                    <option value="JNE">JNE Regular (Rp 15.000)</option>
+                                    <option value="J&T">J&T Express (Rp 18.000)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-3">Rincian Item</h2>
+                        <div id="list-pesanan" class="space-y-2 max-h-48 overflow-y-auto mb-4"></div>
+                        <div class="border-t pt-3 space-y-1 text-sm">
+                            <div class="flex justify-between"><span>Subtotal</span><span id="text-subtotal">Rp 0</span></div>
+                            <div class="flex justify-between font-bold text-base border-t pt-2"><span>Total</span><span id="text-total" class="text-blue-600">Rp 0</span></div>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded mt-4 transition text-sm">Konfirmasi Pesanan</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let itemPesanan = [
+            { nama: "Pemrograman Web Modern", harga: 85000, qty: 1 },
+            { nama: "Desain UI/UX", harga: 75000, qty: 1 }
+        ];
+
+        function renderPesanan() {
+            const container = document.getElementById('list-pesanan');
+            container.innerHTML = '';
+            let subtotal = 0;
+            itemPesanan.forEach((item) => {
+                subtotal += item.harga * item.qty;
+                const div = document.createElement('div');
+                div.className = "flex justify-between items-center bg-gray-50 p-2 rounded text-sm";
+                div.innerHTML = `<span>${item.nama} (${item.qty}x)</span><span class="font-semibold">Rp ${new Intl.NumberFormat('id-ID').format(item.harga * item.qty)}</span>`;
+                container.appendChild(div);
+            });
+            document.getElementById('text-subtotal').innerText = 'Rp ' + new Intl.NumberFormat('id-ID').format(subtotal);
+            document.getElementById('text-total').innerText = 'Rp ' + new Intl.NumberFormat('id-ID').format(subtotal + 15000);
+        }
+
+        function prosesCheckout(e) {
+            e.preventDefault();
+            alert("Pesanan berhasil dikonfirmasi!");
+        }
+
+        document.addEventListener('DOMContentLoaded', renderPesanan);
+    </script>
+</body>
+</html>
