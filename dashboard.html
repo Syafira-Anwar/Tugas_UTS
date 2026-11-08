@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Menu</title>
+    <!-- Menggunakan Tailwind CSS via CDN untuk tampilan yang rapi dan responsif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <!-- Container Utama --><!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col justify-between">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-900">Dashboard Utama</h1>
+            <a href="index.html" class="text-sm bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition">Logout</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-10 px-4 w-full flex-1">
+        <div class="bg-blue-600 text-white rounded-lg shadow-md p-6 mb-8">
+            <h2 id="greeting-text" class="text-2xl font-semibold">Halo!</h2>
+            <p class="text-blue-100 mt-1">Selamat datang kembali di sistem pengelolaan.</p>
+        </div>
+
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Menu Navigasi</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <a href="stok.html" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition border-t-4 border-indigo-500 flex flex-col justify-between">
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-900">Informasi Stok/Katalog</h4>
+                    <p class="text-sm text-gray-500 mt-1">Kelola dan lihat ketersediaan stok.</p>
+                </div>
+                <span class="mt-4 text-sm font-medium text-indigo-600">Buka Menu &rarr;</span>
+            </a>
+            <a href="tracking.html" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition border-t-4 border-green-500 flex flex-col justify-between">
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-900">Tracking Pengiriman</h4>
+                    <p class="text-sm text-gray-500 mt-1">Lacak status pengiriman pesanan.</p>
+                </div>
+                <span class="mt-4 text-sm font-medium text-green-600">Buka Menu &rarr;</span>
+            </a>
+            <a href="checkout.html" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition border-t-4 border-yellow-500 flex flex-col justify-between">
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-900">Laporan Pemesanan</h4>
+                    <p class="text-sm text-gray-500 mt-1">Kelola data pemesanan & checkout.</p>
+                </div>
+                <span class="mt-4 text-sm font-medium text-yellow-600">Buka Menu &rarr;</span>
+            </a>
+            <a href="tracking.html" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition border-t-4 border-purple-500 flex flex-col justify-between">
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-900">History Transaksi</h4>
+                    <p class="text-sm text-gray-500 mt-1">Periksa riwayat transaksi.</p>
+                </div>
+                <span class="mt-4 text-sm font-medium text-purple-600">Buka Menu &rarr;</span>
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t py-4 text-center text-sm text-gray-500">
+        &copy; 2026 Dashboard Sistem Penjualan. All rights reserved.
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.getElementById('greeting-text').innerText = `${getWaktuGreeting()}, Syafira!`;
+    </script>
+</body>
+</html>
+    <div class="min-h-screen flex flex-col justify-between">
+        
+        <!-- Header / Navbar -->
+        <header class="bg-white shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-900">Dashboard Utama</h1>
+                <a href="login.html" class="text-sm bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition">Logout</a>
+            </div>
+        </header>
+
+        <!-- Konten Utama -->
+        <main class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 w-full">
+            
+            <!-- Bagian Greeting Berdasarkan Waktu -->
+            <div class="bg-blue-600 text-white rounded-lg shadow-md p-6 mb-8">
+                <h2 id="greeting-text" class="text-2xl font-semibold">Halo!</h2>
+                <p class="text-blue-100 mt-1">Selamat datang kembali di sistem pengelolaan.</p>
+            </div>
+
+            <!-- Tombol Navigasi Menu -->
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Menu Navigasi</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- 1. Informasi Stok/Katalog -->
+                <a href="katalog.html" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col justify-between border-t-4 border-indigo-500">
+                    <div>
+                        <div class="text-indigo-500 mb-3">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Informasi Stok/Katalog</h4>
+                        <p class="text-sm text-gray-500 mt-1">Kelola dan lihat ketersediaan stok barang.</p>
+                    </div>
+                    <span class="mt-4 text-sm font-medium text-indigo-600 flex items-center">Buka Menu &rarr;</span>
+                </a>
+
+                <!-- 2. Tracking Pengiriman -->
+                <a href="tracking.html" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col justify-between border-t-4 border-green-500">
+                    <div>
+                        <div class="text-green-500 mb-3">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-8h5l2 3v5a1 1 0 01-1 1h-2m-6 0a1 1 0 001-1v-1a1 1 0 00-1-1H9"></path></svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Tracking Pengiriman</h4>
+                        <p class="text-sm text-gray-500 mt-1">Lacak status pengiriman pesanan secara real-time.</p>
+                    </div>
+                    <span class="mt-4 text-sm font-medium text-green-600 flex items-center">Buka Menu &rarr;</span>
+                </a>
+
+                <!-- 3. Laporan Pemesanan -->
+                <a href="laporan.html" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col justify-between border-t-4 border-yellow-500">
+                    <div>
+                        <div class="text-yellow-500 mb-3">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">Laporan Pemesanan</h4>
+                        <p class="text-sm text-gray-500 mt-1">Lihat rekapitulasi data pemesanan produk.</p>
+                    </div>
+                    <span class="mt-4 text-sm font-medium text-yellow-600 flex items-center">Buka Menu &rarr;</span>
+                </a>
+
+                <!-- 4. History Transaksi -->
+                <a href="history.html" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col justify-between border-t-4 border-purple-500">
+                    <div>
+                        <div class="text-purple-500 mb-3">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900">History Transaksi</h4>
+                        <p class="text-sm text-gray-500 mt-1">Periksa riwayat transaksi yang telah selesai.</p>
+                    </div>
+                    <span class="mt-4 text-sm font-medium text-purple-600 flex items-center">Buka Menu &rarr;</span>
+                </a>
+
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t py-4 text-center text-sm text-gray-500">
+            &copy; 2026 Dashboard Sistem Penjualan. All rights reserved.
+        </footer>
+    </div>
+
+    <!-- Script JavaScript untuk Greeting Otomatis Berdasarkan Waktu -->
+    <script>
+        const now = new Date();
+        const hours = now.getHours();
+        const greetingElement = document.getElementById('greeting-text');
+        
+        let greeting = "Halo";
+
+        if (hours >= 3 && hours < 11) {
+            greeting = "Selamat Pagi";
+        } else if (hours >= 11 && hours < 15) {
+            greeting = "Selamat Siang";
+        } else if (hours >= 15 && hours < 18) {
+            greeting = "Selamat Sore";
+        } else {
+            greeting = "Selamat Malam";
+        }
+
+        // Menampilkan teks greeting (bisa dikustomisasi dengan nama user jika ada)
+        greetingElement.innerText = `${greeting}, Pengguna!`;
+    </script>
+</body>
+</html>
